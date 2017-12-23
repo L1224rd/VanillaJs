@@ -1,0 +1,8 @@
+p:hover {
+    cursor: pointer;
+    text-decoration: line-through;
+}
+
+.itemId {
+    visibility: hidden;
+}
