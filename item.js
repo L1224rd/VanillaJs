@@ -11,7 +11,7 @@ function getItems() {
         document.getElementById('list').innerHTML = '';
         for (let i = 0; i < res.length; i++) {
             let element = res[i];
-            document.getElementById('list').innerHTML += `<p onclick=deleteItem(this.getAttribute('itemId')) itemId="${element.id}">${i+1}. ${element.name}</p>`;            
+            document.getElementById('list').innerHTML += `<p onclick=deleteItem(this.getAttribute('itemId')) itemId="${element.id}">${i + 1}. ${element.name}</p>`;
         }
     });
 }
@@ -36,7 +36,7 @@ function httpPost(item, success) {
             success(http.response);
         }
     }
-
+    
     http.send(params);
 }
 
@@ -45,9 +45,11 @@ function httpGet(success) {
     var url = `http://localhost:3000/vjs_todo`;
 
     http.open('GET', url, true);
-
+    
     http.onreadystatechange = () => {
-        if (http.readyState === 4 && http.status === 200) {
+        if(http.status === 0){
+            console.log('Can\'t connect to the server...');
+        } else if (http.readyState === 4 && http.status === 200) {
             success(JSON.parse(http.response));
         }
     }
@@ -73,7 +75,7 @@ function httpDelete(id, success) {
     http.send(params);
 }
 
-function inputEnter(e){
+function inputEnter(e) {
     if (e.keyCode == 13) {
         postItem();
         return false;
